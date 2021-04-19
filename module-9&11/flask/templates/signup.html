@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Project</title>
+    <style>
+      body{
+        background: rgb(122, 120, 120);
+  position: relative;
+  
+      }
+      .game-title {
+    text-transform: uppercase;
+    position: relative;
+    top: 20px;
+    font-size: 36px;
+    left:40%;
+    
+  }
+  .labe{
+    font-size: 20px;
+    position: relative;
+    left:100px;
+    
+  }
+  .lab{
+    font-size: 15px;
+    position: relative;
+    left:100px;
+    width:20%;
+    height: 30px;
+    padding: 5px;
+            border: 1px solid white;
+            border-radius: 5px;
+
+  }
+  .input_field{
+    position: relative;
+    left:100px;
+
+  }
+  .button{
+    font-size: 20px;
+    position: relative;
+    left:400px;
+    width: 7%;
+    height: 40px;
+    padding: 5px;
+            border: 1px solid white;
+            border-radius: 5px;
+  }
+    </style>
+  </head>
+  <body>
+    <p class="game-title"><span >Registration</span><br><span style="position: relative; left:70px;"><strong>Form</strong></span></p><br><br><br>
+    {% if error%}
+      <p>{{error}}</p>
+    {% endif %}
+    {% if msg%}
+      <h2>{{msg}}</h2>
+    {% endif %}
+
+  <form action = "/signup" method = "POST">
+    <div>
+          <label class="labe">User Name </label><br>
+            <input class="lab" type="text" name="name" placeholder="Name" required/>  <br><br>
+        </div>
+        <div>
+        <label class="labe">E-mail </label><br>
+          <input class="lab" type="email" name="email" placeholder="Email" required /><br><br>
+        </div>
+        <label class="labe">Password </label><br>
+          <input class="lab" type="password" name="password" placeholder="Password" required /><br><br>
+        </div>
+      <div>
+        <label class="labe">Confirm Password </label><br>
+          <input class="lab" type="password" name="Cpassword" placeholder="Re-type Password" required /><br><br>
+        </div>
+        <br><br>
+        <input class="button" type="submit" name="Register" value="Register" />
+        <input class="button" type="submit" name="Login" value="Login" />
+      </form>
+ 
+  </body>
+</html>
