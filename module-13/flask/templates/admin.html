@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin Page</title>
+</head>
+<body>
+	<ul>
+		{% for d in details %}
+			<li>{{ d[0] + " - " + d[1] + " - " + d[2]|string}}</li>
+		{% endfor %}
+	</ul>
+</body>
+</html>
+
