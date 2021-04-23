@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>Shelf Table</h2>
+
+<table>
+  <tr>
+    <th>ISBN</th>
+    <th>Name</th>
+    <th>Action</th>
+  </tr>
+            {% for book in books %}
+            <tr>
+              <form action = "{{ url_for('shelf')}}" method="post">
+                <td name = 'book_isbn'>{{ book.isbn }}</td>
+                <input type = "hidden" name = 'book_isbn' value = '{{ book.isbn }}'>
+                <td>{{ book.title }}</td>
+                
+                <td><button name = "remove">remove</button></td>
+              </form>
+            </tr>
+            {% endfor %}
+</table>
+
+</body>
+</html>
+

@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search
+{% endblock %}
+
+{% block body %}
+
+<style>
+body {
+  background-image: url('../static/images/books.jpeg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+
+}
+
+mark {
+  background: white;
+  color: #003366;
+}
+
+</style>
+
+
+
+  <div><h1 style="color: white; font-weight:700" class="m-5"><mark>Search for a book:</mark></h1></div>
+  <form action="/search" method="post">
+    <div class="form-group">
+        <input autocomplete="off" autofocus class="form-control" name="title" placeholder= "Title of book" type="text">
+    </div>
+    <div class="form-group">
+        <input class="form-control" name="isbn" placeholder="ISBN #" type="text">
+    </div>
+    <div class="form-group">
+        <input class="form-control" name="author" placeholder="Author" type="text">
+    </div>
+    <button class="btn btn-primary" type="submit">Submit</button>
+    <!-- <option value="Title" {% if title_ofbook == 1 %}selected="selected"{% endif %}>1</option> -->
+
+</form>
+<br>
+<br>
+<!-- <a href = "/shelf"><button class="btn btn-primary" name = "shelf" type="submit">My Shelf</button></a> -->
+
+
+{% endblock %}
