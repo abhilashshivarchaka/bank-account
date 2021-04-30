@@ -1,0 +1,148 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+
+<style>
+  div.stars {
+  width: 270px;
+  display: inline-block;
+}
+
+input.star { display: none; }
+
+label.star {
+  float: right;
+  padding: 10px;
+  font-size: 36px;
+  color:brown;
+  transition: all .2s;
+}
+
+input.star:checked ~ label.star:before {
+  content: '\f005';
+  color: #FD4;
+  transition: all .25s;
+}
+
+input.star-5:checked ~ label.star:before {
+  color: #FE7;
+  text-shadow: 0 0 20px #952;
+}
+
+input.star-1:checked ~ label.star:before { color: #F62; }
+
+label.star:hover { transform: rotate(-15deg) scale(1.3); }
+
+label.star:before {
+  content: '\f006';
+  font-family: FontAwesome;
+}
+
+
+  input[type=submit]{
+    background-color: black;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  border-radius: 50%;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  }
+
+
+
+
+h1 {
+  text-align: center;
+  font-family: serif;
+  font-weight: normal;
+  text-transform: uppercase;
+  border-bottom: 1px solid #57b1dc;
+  margin-top: 30px;
+}
+
+h5 {
+  color: #003366;
+  padding: 5px;
+  font-size: em;
+}
+
+</style>
+{% endblock %}
+
+{% block title %}Books | {{ book.title }}{% endblock %}
+
+{% block body %}
+<div class="jumbotron">
+  <div class="row">
+
+    <div class="col-xs-3 col-md-3 col-sm-3">
+      <img src="http://covers.openlibrary.org/b/isbn/{{book['isbn']}}-M.jpg" onerror="if (this.src != '../images/noimgavailable.jpg') this.src = '../images/noimgavailable.jpg';">
+    </div>
+
+
+ <div>
+<h1> Title: {{book.title}} </h1>
+<h5> Author : {{ book.author }} </h5>
+<h5> ISBN: {{ book.isbn }} </h5>
+<h5> Year: {{ book.year }} </h5>
+{% if goodreads_Result %}
+<h5> Total Ratings on Goodreads: {{ goodreads_Result.books[0].ratings_count }} </h5>
+<h5> Average rating on Goodreads: {{ goodreads_Result.books[0].average_rating }} </h5>
+<h5>
+    <a href="https://www.goodreads.com/search?q={{book.title}}" target="_blank">Visit Goodreads page</a>
+</h5>
+{% endif %}<br>
+
+            <form action="{{ url_for('book', isbn=book.isbn) }}" method="post">
+
+
+
+                Your review:<br>
+                <textarea name="comment" cols="40" rows="5" value="">{{ user_review.review }}</textarea><br>
+                <div class="star">
+                  
+                    <input class="star star-5" id="star-5" type="radio" name="star" value="5"/>
+                    <label class="star star-5" for="star-5"></label>
+                    <input class="star star-4" id="star-4" type="radio" name="star" value="4"/>
+                    <label class="star star-4" for="star-4"></label>
+                    <input class="star star-3" id="star-3" type="radio" name="star" value="3"/>
+                    <label class="star star-3" for="star-3"></label>
+                    <input class="star star-2" id="star-2" type="radio" name="star" value="2"/>
+                    <label class="star star-2" for="star-2"></label>
+                    <input class="star star-1" id="star-1" type="radio" name="star" value="1"/>
+                    <label class="star star-1" for="star-1"></label>
+                  
+                </div>
+                
+                
+                <!-- <select name="rating">
+                
+                    <option value="1" {% if user_review.review_numb == 1 %}selected="selected"{% endif %}>1</option>
+                    <option value="2" {% if user_review.review_numb == 2 %}selected="selected"{% endif %}>2</option>
+                    <option value="3" {% if user_review.review_numb == 3 %}selected="selected"{% endif %}>3</option>
+                    <option value="4" {% if user_review.review_numb == 4 %}selected="selected"{% endif %}>4</option>
+                    <option value="5" {% if user_review.review_numb == 5 %}selected="selected"{% endif %}>5</option>
+                </select> -->
+                
+                {% if flag %}<input type="submit" name="update" value="Update">{% else %}<input type="submit" name="add" value="Submit">{% endif %}
+              </form>
+              <form action = "{{ url_for('book', isbn=book.isbn)}}" method="post">
+                <input type = "submit" name = "a2s" value = "Add to shelf">
+                <!-- <a href = "/shelf"><button class="btn btn-primary" name = "shelf" type="submit">My Shelf</button></a> -->
+                
+              </form>
+            {% if user_review %}<br>
+            {% for r in user_review %}
+                <ul>
+                  <li>{{ r.name }}</li>
+                <li>{{ r.review }}<br></li>
+                <li>Rated {{ r.rating }}/5</li>
+                </ul>
+                {% endfor %}
+            {% endif %}
+
+
+{% endblock %}

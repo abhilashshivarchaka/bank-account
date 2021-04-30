@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Webpage</title>
+        <script src="{{ url for('static', filename='javascript.js')}}"></script>
+        <link rel="stylesheet" href="{{url for ('static', filename='reference.css')}}">
+        <link rel="stylesheet" href="">
+        <link rel="stylesheet" > 
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    </head>
+    <body>
+        <img src="{{ url for('static', filename='favicon.png')}}" >
+        <a href="{{ url_for('func', param=headline)}}" style="text-decoration: none;" ></a><h2> style="color: black;">Book Search</h2> ></a>
+        <hr class="line">
+        <h6 style="background-color: aliceblue; position: relative; top: 95px; left: 465px;"> Find a book:</h6>
+        <h5 style="position: relative; left: 20px;" >User: {{ headline }}</h5>
+        <form>
+            <select class="custom-select" id="drop" name="dropdown">
+                <option value="ISBN">ISBN</option>
+                <option value="Title">Title</option>
+                <option value="Author">Author</option>
+            </select>
+            <button class="button" onclick="check()">Submit</button>
+            <div class="box">
+                <input class="form-control" type="text" id="Search" placeholder="Search" aria-label="Search" name="box">
+            </div>
+        </form>
+    </body>
+</html>
